@@ -12,7 +12,8 @@ class InfosController extends Controller
 
     public function all(Request $request)
     {
-        $rootapplipath = __DIR__ . '/../Determine/appli';
+//        $rootapplipath = __DIR__ . '/../Determine/appli';
+        $rootapplipath = '/home/farrugia/www/fullCore/html/appli';
         // init
         $customapps = new CustomApps($rootapplipath);
         $customapps->refresh();
