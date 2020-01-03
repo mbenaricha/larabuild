@@ -9,5 +9,5 @@ Don't hesitate to read `Makefile` as it contains all the usefull commands. To di
 # Use
 For the moment, you can :
 - `GET /` to display the homeage 
-- `GET /application-reader` to have a json response containing informations. 
+- `GET /api/application-reader` to have a json response containing informations. 
 <br><br>Note that this project contains unit tests.
