@@ -74,12 +74,4 @@ class ReadApplicationInformations
             'constant'  => $this->getConstant(),
         ]);
     }
-
-    private function getVariables ()
-    {
-        $global = $GLOBALS;
-        $this->deleteKeys(['_GET', '_POST', '_COOKIE', '_FILES', '_SERVER', 'argv', 'argc'], $global);
-
-        return $global;
-    }
 }
