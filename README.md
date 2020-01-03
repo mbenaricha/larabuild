@@ -4,7 +4,7 @@ If you don't use docker, you must install php 7.2+.
 
 
 # Installation 
-Don't hesitate to read `Makefile` as it contains all the usefull commands. To display help, please type `make help`
+Don't hesitate to read `Makefile` as it contains all the useful commands. To display help, please type `make help`
 
 # Use
 For the moment, you can :
