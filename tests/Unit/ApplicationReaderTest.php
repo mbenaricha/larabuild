@@ -29,7 +29,7 @@ class ApplicationReaderTest extends TestCase
         $informationsByApplication = $this->applicationReader->getInformationsByApplication();
         foreach ($informationsByApplication as $application => $information) {
 
-            $this->assertSame($this->rootAppliPath . $application, $information['path']);
+            $this->assertSame(realpath($this->rootAppliPath . $application), $information['path']);
             $applicationInUppercase = strtoupper($application);
 
             $this->assertSame('CONSTANT_VALUE_' . $applicationInUppercase, $information['constant']['CONSTANT']);

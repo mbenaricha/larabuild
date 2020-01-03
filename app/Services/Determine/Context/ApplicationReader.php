@@ -22,7 +22,7 @@ class ApplicationReader
 
     public function __construct (string $applicationPath)
     {
-        $this->rootApplicationPath = $applicationPath[-1] === '/' ? substr($applicationPath, 0, -1) : $applicationPath;
+        $this->rootApplicationPath = realpath($applicationPath[-1] === '/' ? substr($applicationPath, 0, -1) : $applicationPath);
 
         $this->setApplications();
         $this->setInformationsByApplications();
