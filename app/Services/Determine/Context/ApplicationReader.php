@@ -25,7 +25,7 @@ class ApplicationReader
         $this->rootApplicationPath = realpath($applicationPath[-1] === '/' ? substr($applicationPath, 0, -1) : $applicationPath);
 
         $this->setApplications();
-        $this->setInformationsByApplications();
+        $this->setInformationsByApplication();
     }
 
     private function setApplications (): void
@@ -43,7 +43,7 @@ class ApplicationReader
         }));
     }
 
-    private function setInformationsByApplications (): void
+    private function setInformationsByApplication (): void
     {
         $this->informationsByApplication = [];
 
