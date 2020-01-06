@@ -41,6 +41,6 @@ class ApplicationReaderTest extends TestCase
     protected function setUp (): void
     {
         parent::setUp();
-        $this->applicationReader = new ApplicationReader(env('APPLICATION_PATH'));
+        $this->applicationReader = new ApplicationReader(config('determine.application_path'));
     }
 }
