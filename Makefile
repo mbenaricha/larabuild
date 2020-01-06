@@ -10,16 +10,18 @@ NO_COLOR        = \033[m
 
 php := docker-compose run --rm php php
 composer := docker-compose run --rm php composer
-npm := npm
+npm := docker-compose run npm npm
 
 dev: install ## Run the server dev
 	@echo "Start development server on $(PRIMARY_COLOR)http://localhost:8000$(NO_COLOR)"
-	@docker-compose up
+	@docker-compose up -d
+#	@$(php) artisan serve
 
 help: ## Display this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "$(PRIMARY_COLOR)%-15s$(NO_COLOR) %s\n", $$1, $$2}'
 
 install: vendor node_modules ## Install the application
+
 
 test: install ## Run the tests of the application
 	@$(php) vendor/bin/phpunit
