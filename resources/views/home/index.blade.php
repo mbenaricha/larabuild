@@ -7,7 +7,7 @@
 @section('content')
     <section class="jumbotron">
         <h1 class="display-4">Hello, world!</h1>
-        <p class="lead">This is a simple << information by applications >></p>
+        <p class="lead">This is a simple &laquo; information by applications &raquo;</p>
         <p>Don't hesitate to expand this below dump.</p>
         <hr class="my-4">
         @php(dump($informationsByApplication))

@@ -23,6 +23,7 @@ class ReadApplicationInformations
     {
         foreach ($this->definePaths as $__definePath) {
             if (file_exists($this->applicationPath . '/' . $__definePath)) {
+                include_once(__DIR__ . '/../Context/emulationOfLegacyEnvironment/declarationOfGlobalVariables.php');
                 include($this->applicationPath . '/' . $__definePath);
             }
         }
@@ -64,7 +65,6 @@ class ReadApplicationInformations
     public function run ()
     {
         include __DIR__ . '/../Context/emulationOfLegacyEnvironment/declarationOfClassesOrFunctions.php';
-        include __DIR__ . '/../Context/emulationOfLegacyEnvironment/declarationOfGlobalVariables.php';
         include __DIR__ . '/../Context/emulationOfLegacyEnvironment/version.inc';
 
         $variables = $this->includeDefinePathsAndGetVariables();
