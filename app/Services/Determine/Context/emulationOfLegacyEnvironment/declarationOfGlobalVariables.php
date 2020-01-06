@@ -1,6 +1,6 @@
 <?php
 
-//global $ROOT, $AROOT, $CUST_ID, $bdb;
+global $ROOT, $AROOT, $CUST_ID, $bdb;
 
 $_SERVER['BPACK_APPLI'] = '1.0';
 $_SERVER['SERVER_NAME'] = '1.0';

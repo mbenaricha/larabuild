@@ -8,7 +8,9 @@ class HomeController extends Controller
 {
     public function index ()
     {
-        $applicationReader = new ApplicationReader(__DIR__ . '/../../../tests/fixtures/appli');
+//        $applicationPath = __DIR__ . '/../../../tests/fixtures/appli';
+        $applicationPath = '/var/www/fullCore/html/appli';
+        $applicationReader = new ApplicationReader($applicationPath);
         $informationsByApplication = $applicationReader->getInformationsByApplication();
 
         return view('home.index', compact('informationsByApplication'));

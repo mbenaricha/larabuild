@@ -23,7 +23,6 @@ class ApplicationReader
     public function __construct (string $applicationPath)
     {
         $this->rootApplicationPath = realpath($applicationPath[-1] === '/' ? substr($applicationPath, 0, -1) : $applicationPath);
-
         $this->setApplications();
         $this->setInformationsByApplication();
     }
@@ -53,7 +52,7 @@ class ApplicationReader
             $output = [];
 
             exec("php $pathOfScript $applicationPath", $output);
-            $data = json_decode($output[0], true);
+            $data = json_decode($output[count($output) - 1], true);
 
             $this->informationsByApplication[$application] = [
                 'path'      => $applicationPath,

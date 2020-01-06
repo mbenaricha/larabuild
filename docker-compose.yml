@@ -6,17 +6,18 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - .:/var/www/application-reader
+      - .:/var/www/larabuild
       - ./docker/nginx/nginx.sh:/var/nginx.sh
       - ./docker/nginx/sites-enabled:/var/sites-enabled
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - php
     environment:
-      - PROJECT_PATH=/var/www/application-reader
+      - PROJECT_PATH=/var/www/larabuild
     command: ./var/nginx.sh
   php:
     build: ./docker/php
     volumes:
-      - .:/var/www/application-reader
-    working_dir: /var/www/application-reader
+      - .:/var/www/larabuild
+      - ../fullCore:/var/www/fullCore
+    working_dir: /var/www/larabuild
