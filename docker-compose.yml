@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 services:
   nginx:
@@ -16,7 +16,7 @@ services:
     build: ./docker/php
     volumes:
       - .:/var/www/larabuild
-      - ../fullCore:/var/www/fullCore
+      - ${FULLCORE_PATH}:/var/www/fullCore
       - ~/.cache/composer:/.cache/composer
     working_dir: /var/www/larabuild
   node:
