@@ -10,18 +10,6 @@ $ROOT = '';
 $AROOT = '';
 $CUST_ID = '';
 
-class bdd
-{
-    public function BitAnd($a, $b)
-    {
-        return "bitand";
-    }
-    public function qstr($sql)
-    {
-        return "'" . $sql . "'";
-    }
-}
-
 $bdb = new bdd();
 
 if (!defined('CURLOPT_HTTPHEADER')) {

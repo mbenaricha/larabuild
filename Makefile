@@ -9,6 +9,7 @@ WARNING_COLOR   = \033[0;33m
 NO_COLOR        = \033[m
 
 php := docker-compose run --rm php php
+docker_php := docker-compose run --rm php
 composer := docker-compose run --rm php composer
 npm := docker-compose run node npm
 
@@ -26,7 +27,7 @@ help: ## Display this help
 install: vendor node_modules ## Install the application
 
 test: install ## Run the tests of the application
-	@$(php) vendor/bin/phpunit
+	@$(docker_php) vendor/bin/phpunit
 
 update: ## Update the application
 	@$(composer) update

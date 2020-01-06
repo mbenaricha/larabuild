@@ -63,8 +63,8 @@ class ReadApplicationInformations
 
     public function run ()
     {
-        include __DIR__ . '/../Context/emulationOfLegacyEnvironment/declarationOfGlobalVariables.php';
         include __DIR__ . '/../Context/emulationOfLegacyEnvironment/declarationOfClassesOrFunctions.php';
+        include __DIR__ . '/../Context/emulationOfLegacyEnvironment/declarationOfGlobalVariables.php';
         include __DIR__ . '/../Context/emulationOfLegacyEnvironment/version.inc';
 
         $variables = $this->includeDefinePathsAndGetVariables();
