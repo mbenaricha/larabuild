@@ -23,6 +23,10 @@ class ApplicationReader
     public function __construct (string $applicationPath)
     {
         $this->rootApplicationPath = realpath($applicationPath[-1] === '/' ? substr($applicationPath, 0, -1) : $applicationPath);
+        if ($this->rootApplicationPath === false) {
+            throw new \Exception("<< $applicationPath >> is not a valid folder!");
+        }
+
         $this->setApplications();
         $this->setInformationsByApplication();
     }
@@ -78,4 +82,3 @@ class ApplicationReader
         return $this->applications;
     }
 }
-

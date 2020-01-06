@@ -11,10 +11,6 @@ class ApplicationReaderTest extends TestCase
      * @var ApplicationReader
      */
     private $applicationReader;
-    /**
-     * @var string
-     */
-    private $rootAppliPath;
 
     /** @test */
     public function get_applications ()
@@ -29,7 +25,7 @@ class ApplicationReaderTest extends TestCase
         $informationsByApplication = $this->applicationReader->getInformationsByApplication();
         foreach ($informationsByApplication as $application => $information) {
 
-            $this->assertSame(realpath($this->rootAppliPath . $application), $information['path']);
+            $this->assertSame(realpath('/var/www/larabuild/tests/fixtures/appli/' . $application), $information['path']);
             $applicationInUppercase = strtoupper($application);
 
             $this->assertSame('CONSTANT_VALUE_' . $applicationInUppercase, $information['constant']['CONSTANT']);
@@ -45,7 +41,6 @@ class ApplicationReaderTest extends TestCase
     protected function setUp (): void
     {
         parent::setUp();
-        $this->rootAppliPath = __DIR__ . '/../fixtures/appli/';
-        $this->applicationReader = new ApplicationReader($this->rootAppliPath);
+        $this->applicationReader = new ApplicationReader(env('APPLICATION_PATH'));
     }
 }

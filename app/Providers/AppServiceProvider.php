@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider implements DeferrableProvider
      */
     public function register ()
     {
-        $this->app->singleton(ApplicationReader::class, function (/*Application $app*/) {
+        $this->app->singleton(ApplicationReader::class, function () {
             return new ApplicationReader(config('determine.application_path'));
         });
     }
