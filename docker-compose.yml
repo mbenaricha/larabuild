@@ -8,16 +8,18 @@ services:
     volumes:
       - .:/var/www/larabuild
       - ./docker/nginx/nginx.sh:/var/nginx.sh
-      - ./docker/nginx/sites-enabled:/var/sites-enabled
+      - ./docker/nginx/sites-enabled:/etc/nginx/sites-enabled
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - php
-    environment:
-      - PROJECT_PATH=/var/www/larabuild
-    command: ./var/nginx.sh
   php:
     build: ./docker/php
     volumes:
       - .:/var/www/larabuild
       - ../fullCore:/var/www/fullCore
+    working_dir: /var/www/larabuild
+  npm:
+    build: ./docker/npm
+    volumes:
+      - .:/var/www/larabuild
     working_dir: /var/www/larabuild
