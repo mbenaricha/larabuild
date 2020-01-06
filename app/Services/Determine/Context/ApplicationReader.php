@@ -2,6 +2,8 @@
 
 namespace App\Services\Determine\Context;
 
+use Barryvdh\Debugbar\Facade;
+
 class ApplicationReader
 {
     /**
@@ -55,6 +57,8 @@ class ApplicationReader
 
             exec("php $pathOfScript $applicationPath", $output);
             $data = json_decode($output[count($output) - 1], true);
+
+            Facade::info($application, $output);
 
             $this->informationsByApplication[$application] = [
                 'path'      => $applicationPath,
