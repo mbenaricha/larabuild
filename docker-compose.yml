@@ -24,3 +24,4 @@ services:
     volumes:
       - .:/var/www/larabuild
     working_dir: /var/www/larabuild
+    command: "npm run hot"

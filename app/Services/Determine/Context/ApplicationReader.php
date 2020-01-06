@@ -2,8 +2,6 @@
 
 namespace App\Services\Determine\Context;
 
-use App\Services\Determine\Commands\ReadApplicationConstantsCommand;
-
 class ApplicationReader
 {
     /**
