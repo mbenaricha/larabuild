@@ -17,6 +17,7 @@ services:
     volumes:
       - .:/var/www/larabuild
       - ../fullCore:/var/www/fullCore
+      - ~/.cache/composer:/.cache/composer
     working_dir: /var/www/larabuild
   npm:
     build: ./docker/npm
