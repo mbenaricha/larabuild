@@ -19,9 +19,10 @@ services:
       - ../fullCore:/var/www/fullCore
       - ~/.cache/composer:/.cache/composer
     working_dir: /var/www/larabuild
-  npm:
-    build: ./docker/npm
+  node:
+    build: ./docker/node
     volumes:
       - .:/var/www/larabuild
+      - ~/.cache/npm:/root/.npm
     working_dir: /var/www/larabuild
     command: "npm run hot"

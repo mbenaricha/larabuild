@@ -1,4 +1,4 @@
-.PHONY: dev help install test update
+.PHONY: dev stop-dev help install test update
 .DEFAULT_GOAL = help
 
 COM_COLOR       = \033[0;34m
@@ -10,11 +10,15 @@ NO_COLOR        = \033[m
 
 php := docker-compose run --rm php php
 composer := docker-compose run --rm php composer
-npm := docker-compose run npm npm
+npm := docker-compose run node npm
 
-dev: install ## Run the server dev
+dev: install ## Run the dev server
 	@echo "Start development server on $(PRIMARY_COLOR)http://localhost:8000$(NO_COLOR)"
 	@docker-compose up -d
+
+stop-dev: install ## Stop the dev server
+	@echo "Stop development server on $(PRIMARY_COLOR)http://localhost:8000$(NO_COLOR)"
+	@docker-compose down
 
 help: ## Display this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "$(PRIMARY_COLOR)%-15s$(NO_COLOR) %s\n", $$1, $$2}'
