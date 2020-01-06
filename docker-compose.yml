@@ -24,5 +24,7 @@ services:
     volumes:
       - .:/var/www/larabuild
       - ~/.cache/npm:/root/.npm
+    ports:
+      - "8080:8080"
     working_dir: /var/www/larabuild
     command: "npm run hot"
