@@ -9,10 +9,9 @@
     <div class="container-fluid">
       <h1 class="display-4">Visualiser</h1>
       <p class="lead">This is a simple &laquo; information by applications &raquo;</p>
-      {{-- <hr class="my-4"> --}}
-      {{-- @php(dump($informationsByApplication)) --}}
+      <hr class="my-4">
 
-      <table id="table" class="table table-dark table-striped table-responsive">
+      <table id="table" class="table table-striped table-dark">
         <thead>
         <tr>
           <th>Appli</th>

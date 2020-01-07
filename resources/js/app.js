@@ -1,7 +1,4 @@
-import $ from 'jquery';
-import Datatable from 'datatables.net-dt';
-
-Datatable();
+require( 'datatables.net-bs4' );
 
 $(document).ready(function() {
    $('#table').DataTable();

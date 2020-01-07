@@ -12,8 +12,17 @@ const mix = require('laravel-mix');
  */
 
  mix
- .webpackConfig({
-    devServer: { host: '0.0.0.0' },
-})
-.js('resources/js/app.js', 'public/js')
-.sass('resources/sass/app.scss', 'public/css');
+ .webpackConfig(webpack => {
+     return {
+         plugins: [
+             new webpack.ProvidePlugin({
+                 $: 'jquery',
+                 jQuery: 'jquery',
+             })
+         ],
+
+         devServer: { host: '0.0.0.0' },
+     };
+ })
+ .js('resources/js/app.js', 'public/js')
+ .sass('resources/sass/app.scss', 'public/css');
