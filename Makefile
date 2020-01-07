@@ -25,6 +25,8 @@ help: ## Display this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "$(PRIMARY_COLOR)%-15s$(NO_COLOR) %s\n", $$1, $$2}'
 
 install: vendor node_modules ## Install the application
+	@cp .env.example .env
+	@echo "\e[92m\e[1mDon't forget to set FULLCORE_PATH in .env to the right folder"
 
 test: install ## Run the tests of the application
 	@$(docker_php) vendor/bin/phpunit
