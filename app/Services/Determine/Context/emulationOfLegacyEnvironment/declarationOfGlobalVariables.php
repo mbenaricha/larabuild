@@ -1,16 +1,20 @@
 <?php
 
-global $ROOT, $AROOT, $CUST_ID, $bdb;
+global $ROOT, $AROOT, $CUST_ID, $bdb, $rwroot, $appconf, $custid;
 
-$_SERVER['BPACK_APPLI'] = '1.0';
-$_SERVER['SERVER_NAME'] = '1.0';
-$_SERVER['REQUEST_URI'] = '1.0';
+$_SERVER['BPACK_APPLI'] = '';
+$_SERVER['SERVER_NAME'] = '';
+$_SERVER['REQUEST_URI'] = '';
+$_SERVER['HTTP_HOST'] = '';
 
 $ROOT = '';
 $AROOT = '';
 $CUST_ID = '';
-
 $bdb = new bdd();
+$rwroot = '';
+$appconf['root_file'] = '';
+$custid = '';
+
 
 if (!defined('CURLOPT_HTTPHEADER')) {
     define('CURLOPT_HTTPHEADER', '');
