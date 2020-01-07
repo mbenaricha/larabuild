@@ -1,3 +1,8 @@
-import "bootstrap";
+import $ from 'jquery';
+import Datatable from 'datatables.net-dt';
 
-console.log('toto 2')
+Datatable();
+
+$(document).ready(function() {
+   $('#table').DataTable();
+});
