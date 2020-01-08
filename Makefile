@@ -7,6 +7,7 @@ SUCCESS_COLOR   = \033[0;32m
 DANGER_COLOR    = \033[0;31m
 WARNING_COLOR   = \033[0;33m
 NO_COLOR        = \033[m
+BOLD						= \e[1m
 
 php := docker-compose run --rm php php
 docker_php := docker-compose run --rm php
@@ -25,7 +26,9 @@ help: ## Display this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "$(PRIMARY_COLOR)%-15s$(NO_COLOR) %s\n", $$1, $$2}'
 
 install: vendor node_modules ## Install the application
-	@echo "\e[92m\e[1mDon't forget to set FULLCORE_PATH in .env to the right folder"
+	@$(docker_php) chmod -R 777 storage
+	@$(php) artisan key:generate --ansi
+	@echo "$(SUCCESS_COLOR)$(BOLD)Don't forget to set FULLCORE_PATH in .env to the right folder$(NO_COLOR)"
 
 test: install ## Run the tests of the application
 	@$(docker_php) vendor/bin/phpunit
@@ -35,7 +38,10 @@ update: ## Update the application
 	@$(npm) install
 
 vendor: composer.json
-	cp .env.example .env
+ifeq (,$(wildcard .env))
+	@cp .env.example .env
+	@echo "$(SUCCESS_COLOR)$(BOLD).env Created$(NO_COLOR)"
+endif
 	@$(composer) install
 
 node_modules: package.json
