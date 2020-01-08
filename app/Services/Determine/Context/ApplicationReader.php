@@ -73,9 +73,8 @@ class ApplicationReader
                 'variables' => $data['variables'],
                 'constant'  => $data['constant'],
             ];
-
-            Cache::add($this->rootApplicationPath, $this->informationsByApplication);
         }
+        Cache::add($this->rootApplicationPath, $this->informationsByApplication);
     }
 
     /**
