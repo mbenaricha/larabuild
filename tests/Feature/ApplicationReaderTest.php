@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\Services\Determine\Context\ApplicationReader;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class ApplicationReaderTest extends TestCase
 {
@@ -31,16 +31,14 @@ class ApplicationReaderTest extends TestCase
             $this->assertSame('CONSTANT_VALUE_' . $applicationInUppercase, $information['constant']['CONSTANT']);
 
             $this->assertSame(
-                ['DbStruct' =>
-                     ['FIELD' => ['KEY_' . $applicationInUppercase => 'VALUE_' . $applicationInUppercase]]
-                ],
-                $information['variables']);
+                ['FIELD' => ['KEY_' . $applicationInUppercase => 'VALUE_' . $applicationInUppercase]],
+                $information['variables']['DbStruct']);
         }
     }
 
     protected function setUp (): void
     {
         parent::setUp();
-        $this->applicationReader = new ApplicationReader(config('determine.application_path'));
+        $this->applicationReader = app(ApplicationReader::class);
     }
 }
