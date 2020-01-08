@@ -28,7 +28,7 @@ help: ## Display this help
 install: vendor node_modules ## Install the application
 	@$(docker_php) chmod -R 777 storage
 	@$(php) artisan key:generate --ansi
-	@echo "$(SUCCESS_COLOR)$(BOLD)Don't forget to set FULLCORE_PATH in .env to the right folder$(NO_COLOR)"
+	@echo "$(PRIMARY_COLOR)$(BOLD)Don't forget to set FULLCORE_PATH in .env to the right folder$(NO_COLOR)"
 
 test: install ## Run the tests of the application
 	@$(docker_php) vendor/bin/phpunit

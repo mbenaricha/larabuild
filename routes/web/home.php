@@ -2,4 +2,5 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'HomeController@index')->name('home.index');
+Route::get('/constants', 'HomeController@constantViewer')->name('home.constant-viewer');
+Route::get('/vars', 'HomeController@varViewer')->name('home.var-viewer');
