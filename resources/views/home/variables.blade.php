@@ -14,7 +14,7 @@
         <p class="lead">This is a simple display of &laquo; variables &raquo;</p>
         <hr class="my-4">
 
-        <table id="table" class="table table-striped table-dark table-responsive">
+        <table id="table" class="table table-striped table-dark">
             <thead>
             <tr>
                 <th>Application</th>

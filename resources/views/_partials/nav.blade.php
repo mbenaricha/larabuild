@@ -13,7 +13,7 @@
 
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a href="#" class="nav-link text-danger">Reset cache</a>
+                <a href="{{ route('home.reset-cache') }}" class="nav-link text-danger">Reset cache</a>
             </li>
         </ul>
     </div>
