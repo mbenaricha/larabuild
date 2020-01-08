@@ -11,15 +11,14 @@ If you use docker, you have to install docker and docker-compose. You can find t
 Don't hesitate to read `Makefile` as it contains all the useful commands. To display help, please type `make help`
 
 Just clone the repo, then follow thoses steps :
-- go to the repo root
-- `make install`
-- at the end of .env file, change the `FULLCORE_PATH=~/fullCore` to the fullcore path on your machine
+- `cd larabuild && make install`
+- at the end of .env file, change the `FULLCORE_PATH=~/fullCore` to the fullCore path on your machine
 - `make dev`
-- You can now access the poject on 12.0.0.1:8000/vars
+- You can now access the project on 12.0.0.1:8000/vars
 
 ## Use
 For the moment, you can :
 - `GET /vars` to display a variables searchable list
-- `GET /constants` to display a constant seachable list
-- `GET /api/application-reader` to have a json response containing informations.
+- `GET /constants` to display a constant searchable list
+- `GET /api/application-reader` to have a json response containing information.
 <br><br>Note that this project contains unit tests.
