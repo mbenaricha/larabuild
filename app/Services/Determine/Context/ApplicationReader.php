@@ -2,7 +2,7 @@
 
 namespace App\Services\Determine\Context;
 
-use Barryvdh\Debugbar\Facade;
+use Illuminate\Support\Facades\Cache;
 
 class ApplicationReader
 {
@@ -33,6 +33,11 @@ class ApplicationReader
 
     private function setApplications (): void
     {
+        if (Cache::has($this->rootApplicationPath)) {
+            $this->applications = array_keys(Cache::get($this->rootApplicationPath));
+            return;
+        }
+
         $applicationFolders = scandir($this->rootApplicationPath);
         if (!$applicationFolders) {
             throw new \Exception("<< $this->rootApplicationPath >> not found!");
@@ -48,6 +53,11 @@ class ApplicationReader
 
     private function setInformationsByApplication (): void
     {
+        if (Cache::has($this->rootApplicationPath)) {
+            $this->informationsByApplication = Cache::get($this->rootApplicationPath);
+            return;
+        }
+
         $this->informationsByApplication = [];
 
         foreach ($this->applications as $application) {
@@ -57,8 +67,6 @@ class ApplicationReader
 
             exec("php $pathOfScript $applicationPath", $output);
             $data = json_decode($output[count($output) - 1], true);
-
-            Facade::info($application, $output);
 
             $this->informationsByApplication[$application] = [
                 'path'      => $applicationPath,
@@ -82,5 +90,10 @@ class ApplicationReader
     public function getApplications (): array
     {
         return $this->applications;
+    }
+
+    public function resetCache (): void
+    {
+        Cache::forget($this->rootApplicationPath);
     }
 }

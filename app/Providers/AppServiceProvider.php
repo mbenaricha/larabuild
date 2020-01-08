@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Services\Determine\Context\ApplicationReader;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
+use webignition\JsonPrettyPrinter\JsonPrettyPrinter;
 
 class AppServiceProvider extends ServiceProvider implements DeferrableProvider
 {
