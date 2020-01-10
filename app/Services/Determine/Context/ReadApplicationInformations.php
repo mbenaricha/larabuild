@@ -16,6 +16,9 @@ class ReadApplicationInformations
     public function __construct (string $applicationPath)
     {
         $this->applicationPath = $applicationPath;
+        if (!is_dir($this->applicationPath)) {
+            throw new \Exception("<< $applicationPath >> is not a directory");
+        }
         $this->definePaths = ['version.inc', 'config.inc', 'dbstruct.inc', 'setup_entry.inc'];
     }
 
