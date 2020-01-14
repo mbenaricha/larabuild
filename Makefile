@@ -38,7 +38,7 @@ update: ## Update the application
 	@$(npm) install
 
 vendor: composer.json
-ifeq (,$(wildcard .env))
+ifeq (,$(wildcard .env)) #If .env is existed
 	@cp .env.example .env
 	@echo "$(SUCCESS_COLOR)$(BOLD).env Created$(NO_COLOR)"
 endif
