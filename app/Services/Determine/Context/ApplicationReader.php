@@ -2,6 +2,8 @@
 
 namespace App\Services\Determine\Context;
 
+use Illuminate\Cache\CacheManager;
+use Illuminate\Cache\Repository as CacheRepository;
 use Illuminate\Support\Facades\Cache;
 
 class ApplicationReader
@@ -18,14 +20,20 @@ class ApplicationReader
      * @var string[]
      */
     private $informationsByApplication;
+    /**
+     * @var CacheRepository
+     */
+    private $cache;
 
 
-    public function __construct (string $applicationPath)
+    public function __construct (string $applicationPath, CacheRepository $cache)
     {
         $this->rootApplicationPath = realpath($applicationPath[-1] === '/' ? substr($applicationPath, 0, -1) : $applicationPath);
         if ($this->rootApplicationPath === false) {
             throw new \Exception("<< $applicationPath >> is not a valid folder!");
         }
+
+        $this->cache = $cache;
 
         $this->setApplications();
         $this->setInformationsByApplication();
@@ -33,8 +41,8 @@ class ApplicationReader
 
     private function setApplications (): void
     {
-        if (Cache::has($this->rootApplicationPath)) {
-            $this->applications = array_keys(Cache::get($this->rootApplicationPath));
+        if ($this->cache->has($this->rootApplicationPath)) {
+            $this->applications = array_keys($this->cache->get($this->rootApplicationPath));
             return;
         }
 
@@ -53,8 +61,8 @@ class ApplicationReader
 
     private function setInformationsByApplication (): void
     {
-        if (Cache::has($this->rootApplicationPath)) {
-            $this->informationsByApplication = Cache::get($this->rootApplicationPath);
+        if ($this->cache->has($this->rootApplicationPath)) {
+            $this->informationsByApplication = $this->cache->get($this->rootApplicationPath);
             return;
         }
 
@@ -74,7 +82,8 @@ class ApplicationReader
                 'constant'  => $data['constant'],
             ];
         }
-        Cache::add($this->rootApplicationPath, $this->informationsByApplication);
+
+        $this->cache->add($this->rootApplicationPath, $this->informationsByApplication);
     }
 
     /**
@@ -95,6 +104,6 @@ class ApplicationReader
 
     public function resetCache (): void
     {
-        Cache::forget($this->rootApplicationPath);
+        $this->cache->forget($this->rootApplicationPath);
     }
 }

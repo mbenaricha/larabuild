@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Services\Determine\Context\ApplicationReader;
+use Illuminate\Cache\Repository;
 use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use webignition\JsonPrettyPrinter\JsonPrettyPrinter;
 
@@ -16,8 +18,8 @@ class AppServiceProvider extends ServiceProvider implements DeferrableProvider
      */
     public function register ()
     {
-        $this->app->singleton(ApplicationReader::class, function () {
-            return new ApplicationReader(config('determine.application_path'));
+        $this->app->singleton(ApplicationReader::class, function (Application $app) {
+            return new ApplicationReader(config('determine.application_path'), $app->make(Repository::class));
         });
     }
 
