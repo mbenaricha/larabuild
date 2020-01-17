@@ -1,7 +1,7 @@
 ## Introduction
 This project let you know what vars and constants are used by clients, with a frontend search engine.
 This project provides a docker set up. Using docker is not mandatory but it's better to have consistencies between developers. It makes the project usable really fast. <br><br>
-If : 
+If : <br>
 - *you don't use docker*, you must install php 7.2+, node and nginx.
 - *you use docker*, you have to install docker and docker-compose. You can find the install documentation here :
     - docker : https://docs.docker.com/install/
