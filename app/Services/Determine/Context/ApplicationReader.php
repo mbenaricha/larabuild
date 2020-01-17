@@ -2,9 +2,8 @@
 
 namespace App\Services\Determine\Context;
 
-use Illuminate\Cache\CacheManager;
-use Illuminate\Cache\Repository as CacheRepository;
-use Illuminate\Support\Facades\Cache;
+
+use Psr\SimpleCache\CacheInterface;
 
 class ApplicationReader
 {
@@ -26,7 +25,7 @@ class ApplicationReader
     private $cache;
 
 
-    public function __construct (string $applicationPath, CacheRepository $cache)
+    public function __construct (string $applicationPath, CacheInterface $cache)
     {
         $this->rootApplicationPath = realpath($applicationPath[-1] === '/' ? substr($applicationPath, 0, -1) : $applicationPath);
         if ($this->rootApplicationPath === false) {
