@@ -13,7 +13,7 @@ class ReadApplicationInformations
      */
     private $definePaths;
 
-    public function __construct (string $applicationPath)
+    public function __construct(string $applicationPath)
     {
         $this->applicationPath = $applicationPath;
         if (!is_dir($this->applicationPath)) {
@@ -22,35 +22,43 @@ class ReadApplicationInformations
         $this->definePaths = ['version.inc', 'config.inc', 'dbstruct.inc', 'setup_entry.inc'];
     }
 
-    private function includeDefinePathsAndGetVariables (): array
+    private function includeDefinePathsAndGetVariables(): array
     {
-      include_once(__DIR__ . '/../Context/emulationOfLegacyEnvironment/declarationOfGlobalVariables.php');
+        $__isApplicationFolder = false;
+        include_once(__DIR__ . '/../Context/emulationOfLegacyEnvironment/declarationOfGlobalVariables.php');
         foreach ($this->definePaths as $__definePath) {
             if (file_exists($this->applicationPath . '/' . $__definePath)) {
+                $__isApplicationFolder = true;
                 include($this->applicationPath . '/' . $__definePath);
             }
         }
 
+        if (!$__isApplicationFolder) {
+            throw new \Exception("<< $this->applicationPath >> is not a application folder");
+        }
+
         $variables = get_defined_vars();
         unset($variables['__definePath']);
+
+
         return $variables;
     }
 
-    private function getConstant (): array
+    private function getConstants(): array
     {
-      return get_defined_constants(true)['user'] ?? [];
+        return get_defined_constants(true)['user'] ?? [];
     }
 
-    public function run ()
+    public function getInformations()
     {
         include __DIR__ . '/../Context/emulationOfLegacyEnvironment/declarationOfClassesOrFunctions.php';
         include __DIR__ . '/../Context/emulationOfLegacyEnvironment/version.inc';
 
         $variables = $this->includeDefinePathsAndGetVariables();
 
-        echo json_encode([
+        return [
             'variables' => $variables,
-            'constant'  => $this->getConstant(),
-        ]);
+            'constants' => $this->getConstants(),
+        ];
     }
 }
