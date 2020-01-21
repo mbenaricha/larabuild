@@ -51,14 +51,14 @@ class ReadApplicationInformations
         }
 
         $variables = get_defined_vars();
-        $this->deleteKeys(['__definePath', '__isApplicationFolder'], $variables);
+        $this->deleteKeys(['^__definePath', '^__isApplicationFolder'], $variables);
         return $variables;
     }
 
     private function getConstants (): array
     {
         $constants = get_defined_constants(true)['user'] ?? [];
-        $this->deleteKeys(['^U_IDNA', '^IDNA', '_IDNA_'], $constants);
+        $this->deleteKeys(['^U_IDNA', '^IDNA_', '_IDNA_'], $constants);
         return $constants;
     }
 
@@ -70,7 +70,7 @@ class ReadApplicationInformations
     {
         foreach ($array as $key => $value) {
             foreach ($regexes as $regex) {
-                if ($regex === $key || preg_match($regex, $key) !== false) {
+                if (preg_match("/$regex/", $key)) {
                     unset($array[$key]);
                 }
             }
