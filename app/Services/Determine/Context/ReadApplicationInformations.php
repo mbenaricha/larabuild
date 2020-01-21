@@ -13,7 +13,7 @@ class ReadApplicationInformations
      */
     private $definePaths;
 
-    public function __construct(string $applicationPath)
+    public function __construct (string $applicationPath)
     {
         $this->applicationPath = $applicationPath;
         if (!is_dir($this->applicationPath)) {
@@ -22,7 +22,20 @@ class ReadApplicationInformations
         $this->definePaths = ['version.inc', 'config.inc', 'dbstruct.inc', 'setup_entry.inc'];
     }
 
-    private function includeDefinePathsAndGetVariables(): array
+    public function getInformations ()
+    {
+        include __DIR__ . '/../Context/emulationOfLegacyEnvironment/declarationOfClassesOrFunctions.php';
+        include __DIR__ . '/../Context/emulationOfLegacyEnvironment/version.inc';
+
+        $variables = $this->includeDefinePathsAndGetVariables();
+
+        return [
+            'variables' => $variables,
+            'constants' => $this->getConstants(),
+        ];
+    }
+
+    private function includeDefinePathsAndGetVariables (): array
     {
         $__isApplicationFolder = false;
         include_once(__DIR__ . '/../Context/emulationOfLegacyEnvironment/declarationOfGlobalVariables.php');
@@ -38,37 +51,29 @@ class ReadApplicationInformations
         }
 
         $variables = get_defined_vars();
-        unset($variables['__definePath'], $variables['__isApplicationFolder']);
-
-
+        $this->deleteKeys(['__definePath', '__isApplicationFolder'], $constants);
         return $variables;
     }
 
-    private function deleteKeys(string $regex, array &$array) {
-        foreach($array as $key => $value) {
-            if (preg_match($regex, $key) !== false) {
-                unset($array[$key]);
-            }
-        }
-    }
-
-    private function getConstants(): array
+    private function getConstants (): array
     {
         $constants = get_defined_constants(true)['user'] ?? [];
-
+        $this->deleteKeys(['^U_IDNA', '^IDNA', '_IDNA_'], $constants);
         return $constants;
     }
 
-    public function getInformations()
+    /**
+     * @param array $regexes
+     * @param array $array
+     */
+    private function deleteKeys (array $regexes, array &$array)
     {
-        include __DIR__ . '/../Context/emulationOfLegacyEnvironment/declarationOfClassesOrFunctions.php';
-        include __DIR__ . '/../Context/emulationOfLegacyEnvironment/version.inc';
-
-        $variables = $this->includeDefinePathsAndGetVariables();
-
-        return [
-            'variables' => $variables,
-            'constants' => $this->getConstants(),
-        ];
+        foreach ($array as $key => $value) {
+            foreach ($regexes as $regex) {
+                if (preg_match($regex, $key) !== false) {
+                    unset($array[$key]);
+                }
+            }
+        }
     }
 }
