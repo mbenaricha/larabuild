@@ -1,4 +1,4 @@
-.PHONY: dev stop-dev help install test update
+.PHONY: dev stop-dev help install test update bash
 .DEFAULT_GOAL = help
 
 COM_COLOR       = \033[0;34m
@@ -13,6 +13,9 @@ php := docker-compose run --rm php php
 docker_php := docker-compose run --rm php
 composer := docker-compose run --rm php composer
 npm := docker-compose run node npm
+
+bash: ## Run bash into php service
+	@$(docker_php) bash
 
 dev: install ## Run the dev server
 	@echo "Start development server on $(PRIMARY_COLOR)http://localhost:8000$(NO_COLOR)"
