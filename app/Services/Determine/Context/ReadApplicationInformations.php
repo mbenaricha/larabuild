@@ -38,7 +38,7 @@ class ReadApplicationInformations
         }
 
         $variables = get_defined_vars();
-        unset($variables['__definePath'], $variables['__isApplication']);
+        unset($variables['__definePath'], $variables['__isApplicationFolder']);
 
 
         return $variables;
