@@ -51,7 +51,7 @@ class ReadApplicationInformations
         }
 
         $variables = get_defined_vars();
-        $this->deleteKeys(['__definePath', '__isApplicationFolder'], $constants);
+        $this->deleteKeys(['__definePath', '__isApplicationFolder'], $variables);
         return $variables;
     }
 
@@ -70,7 +70,7 @@ class ReadApplicationInformations
     {
         foreach ($array as $key => $value) {
             foreach ($regexes as $regex) {
-                if (preg_match($regex, $key) !== false) {
+                if ($regex === $key || preg_match($regex, $key) !== false) {
                     unset($array[$key]);
                 }
             }
