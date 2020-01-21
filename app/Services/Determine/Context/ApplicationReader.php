@@ -78,7 +78,7 @@ class ApplicationReader
             $this->informationsByApplication[$application] = [
                 'path'      => $applicationPath,
                 'variables' => $data['variables'],
-                'constant'  => $data['constant'],
+                'constants'  => $data['constants'],
             ];
         }
 

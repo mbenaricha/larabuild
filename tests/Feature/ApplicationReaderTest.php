@@ -28,7 +28,7 @@ class ApplicationReaderTest extends TestCase
             $this->assertSame(realpath('/var/www/larabuild/tests/fixtures/appli/' . $application), $information['path']);
             $applicationInUppercase = strtoupper($application);
 
-            $this->assertSame('CONSTANT_VALUE_' . $applicationInUppercase, $information['constant']['CONSTANT']);
+            $this->assertSame('CONSTANT_VALUE_' . $applicationInUppercase, $information['constants']['CONSTANT']);
 
             $this->assertSame(
                 ['FIELD' => ['KEY_' . $applicationInUppercase => 'VALUE_' . $applicationInUppercase]],
