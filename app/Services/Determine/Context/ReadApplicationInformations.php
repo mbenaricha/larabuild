@@ -38,15 +38,25 @@ class ReadApplicationInformations
         }
 
         $variables = get_defined_vars();
-        unset($variables['__definePath']);
+        unset($variables['__definePath'], $variables['__isApplication']);
 
 
         return $variables;
     }
 
+    private function deleteKeys(string $regex, array &$array) {
+        foreach($array as $key => $value) {
+            if (preg_match($regex, $key) !== false) {
+                unset($array[$key]);
+            }
+        }
+    }
+
     private function getConstants(): array
     {
-        return get_defined_constants(true)['user'] ?? [];
+        $constants = get_defined_constants(true)['user'] ?? [];
+
+        return $constants;
     }
 
     public function getInformations()

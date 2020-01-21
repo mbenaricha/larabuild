@@ -24,7 +24,7 @@
             </thead>
             <tbody>
             @foreach ($informationsByApplication as $applicationName => $appli)
-          @foreach ($appli["constant"] as $constantName => $constantValue)
+          @foreach ($appli["constants"] as $constantName => $constantValue)
             <tr>
               <td>{{ $applicationName }}</td>
               <td>{{ $constantName }}</td>
