@@ -23,8 +23,7 @@ class ApplicationReaderTest extends TestCase
         $cache = app(CacheInterface::class);
         $this->assertFalse($cache->has(config('determine.application_path')));
 
-        //Reconstruct ApplicationReader to set cache
-        $this->makeApplicationReader();
+        $this->makeApplicationReader(); //Reconstruct ApplicationReader to set cache
 
         $this->assertIsArray($cache->get(config('determine.application_path')));
     }
