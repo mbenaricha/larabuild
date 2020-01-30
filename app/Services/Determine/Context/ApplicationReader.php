@@ -105,4 +105,12 @@ class ApplicationReader
     {
         $this->cache->forget($this->rootApplicationPath);
     }
+
+    /**
+     * @return string
+     */
+    public function getRootApplicationPath (): string
+    {
+        return $this->rootApplicationPath;
+    }
 }

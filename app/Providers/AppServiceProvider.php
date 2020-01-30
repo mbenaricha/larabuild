@@ -7,6 +7,7 @@ use Illuminate\Cache\Repository;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use Psr\SimpleCache\CacheInterface;
 use webignition\JsonPrettyPrinter\JsonPrettyPrinter;
 
 class AppServiceProvider extends ServiceProvider implements DeferrableProvider
@@ -19,7 +20,7 @@ class AppServiceProvider extends ServiceProvider implements DeferrableProvider
     public function register ()
     {
         $this->app->singleton(ApplicationReader::class, function (Application $app) {
-            return new ApplicationReader(config('determine.application_path'), $app->make(Repository::class));
+            return new ApplicationReader(config('determine.application_path'), $app->make(CacheInterface::class));
         });
     }
 

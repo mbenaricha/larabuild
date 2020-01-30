@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Services\Determine\Context\ApplicationReader;
+use Psr\SimpleCache\CacheInterface;
 use Tests\TestCase;
 
 class ApplicationReaderTest extends TestCase
@@ -12,9 +13,27 @@ class ApplicationReaderTest extends TestCase
      */
     private $applicationReader;
 
+    private function makeApplicationReader() {
+        $this->applicationReader = app(ApplicationReader::class);
+    }
+
+    /** @test */
+    public function test_cache()
+    {
+        $cache = app(CacheInterface::class);
+        $this->assertFalse($cache->has(config('determine.application_path')));
+
+        //Reconstruct ApplicationReader to set cache
+        $this->makeApplicationReader();
+
+        $this->assertIsArray($cache->get(config('determine.application_path')));
+    }
+
     /** @test */
     public function get_applications ()
     {
+        $this->makeApplicationReader();
+
         $applicationPaths = $this->applicationReader->getApplications();
         $this->assertEquals(['but', 'dasco', 'maisonsdumonde', 'valeo'], $applicationPaths);
     }
@@ -22,6 +41,8 @@ class ApplicationReaderTest extends TestCase
     /** @test */
     public function get_informations_by_application ()
     {
+        $this->makeApplicationReader();
+
         $informationsByApplication = $this->applicationReader->getInformationsByApplication();
         foreach ($informationsByApplication as $application => $information) {
 
@@ -34,11 +55,5 @@ class ApplicationReaderTest extends TestCase
                 ['FIELD' => ['KEY_' . $applicationInUppercase => 'VALUE_' . $applicationInUppercase]],
                 $information['variables']['DbStruct']);
         }
-    }
-
-    protected function setUp (): void
-    {
-        parent::setUp();
-        $this->applicationReader = app(ApplicationReader::class);
     }
 }
