@@ -22,17 +22,17 @@ class ReadApplicationInformations
         $this->definePaths = ['version.inc', 'config.inc', 'dbstruct.inc', 'setup_entry.inc'];
     }
 
-    public function getInformations ()
+    public function run ()
     {
         include __DIR__ . '/../Context/emulationOfLegacyEnvironment/declarationOfClassesOrFunctions.php';
         include __DIR__ . '/../Context/emulationOfLegacyEnvironment/version.inc';
 
         $variables = $this->includeDefinePathsAndGetVariables();
 
-        return [
+        echo json_encode([
             'variables' => $variables,
             'constants' => $this->getConstants(),
-        ];
+        ]);
     }
 
     private function includeDefinePathsAndGetVariables (): array

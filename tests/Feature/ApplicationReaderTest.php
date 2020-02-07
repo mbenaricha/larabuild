@@ -18,7 +18,7 @@ class ApplicationReaderTest extends TestCase
     }
 
     /** @test */
-    public function test_cache_is_set_in_service_constructor()
+    public function test_cache_works_in_service_constructor()
     {
         $cache = app(CacheInterface::class);
         $this->assertFalse($cache->has(config('determine.application_path')));
@@ -44,8 +44,9 @@ class ApplicationReaderTest extends TestCase
 
         $informationsByApplication = $this->applicationReader->getInformationsByApplication();
         foreach ($informationsByApplication as $application => $information) {
-            $this->assertSame(realpath('/var/www/larabuild/tests/fixtures/appli/' . $application), $information['path']);
             $applicationInUppercase = strtoupper($application);
+
+            $this->assertSame(realpath("/var/www/larabuild/tests/fixtures/appli/{$application}"), $information['path']);
 
             $this->assertSame('CONSTANT_VALUE_' . $applicationInUppercase, $information['constants']['CONSTANT']);
 

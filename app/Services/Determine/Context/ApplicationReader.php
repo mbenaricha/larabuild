@@ -52,7 +52,6 @@ class ApplicationReader
 
         $applicationFolders = array_slice($applicationFolders, 2);
 
-
         $this->applications = array_values(array_filter($applicationFolders, function (string $applicationFolder) {
             return is_dir($this->rootApplicationPath . '/' . $applicationFolder);
         }));
@@ -73,16 +72,16 @@ class ApplicationReader
             $output = [];
 
             exec("php $pathOfScript $applicationPath", $output);
-            $data = json_decode($output[count($output) - 1], true);
+            ['variables' => $variables, 'constants' => $constants] = json_decode($output[count($output) - 1], true);
 
             $this->informationsByApplication[$application] = [
                 'path'      => $applicationPath,
-                'variables' => $data['variables'],
-                'constants'  => $data['constants'],
+                'variables' => $variables,
+                'constants' => $constants,
             ];
         }
 
-        $this->cache->add($this->rootApplicationPath, $this->informationsByApplication);
+        $this->cache->set($this->rootApplicationPath, $this->informationsByApplication);
     }
 
     /**
