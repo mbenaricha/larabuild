@@ -24,15 +24,15 @@
             </thead>
             <tbody>
             @foreach ($informationsByApplication as $applicationName => $appli)
-          @foreach ($appli["constants"] as $constantName => $constantValue)
-            <tr>
-              <td>{{ $applicationName }}</td>
-              <td>{{ $constantName }}</td>
-              <td>{{ $constantValue }}</td>
-            </tr>
-          @endforeach
-        @endforeach
-        </tbody>
-      </table>
-      </div>
+                @foreach ($appli["constants"] as $constantName => $constantValue)
+                    <tr>
+                        <td>{{ $applicationName }}</td>
+                        <td>{{ $constantName }}</td>
+                        <td>{{ $constantValue }}</td>
+                    </tr>
+                @endforeach
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection
