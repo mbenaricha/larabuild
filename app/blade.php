@@ -3,7 +3,12 @@
 use Illuminate\Support\HtmlString;
 
 /**
- * @param mixed $value
+ * If the value is too long, we display a toggle button in addition to the value
+ *
+ * @param string $value
+ * @param int    $limit
+ *
+ * @return HtmlString
  */
 function print_variable_value ($value, int $limit = 100): HtmlString
 {
