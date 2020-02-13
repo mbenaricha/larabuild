@@ -7,7 +7,7 @@ SUCCESS_COLOR   = \033[0;32m
 DANGER_COLOR    = \033[0;31m
 WARNING_COLOR   = \033[0;33m
 NO_COLOR        = \033[m
-BOLD						= \e[1m
+BOLD			= \e[1m
 
 php := docker-compose run --rm php php
 docker_php := docker-compose run --rm php
@@ -38,6 +38,7 @@ test: install ## Run the tests of the application
 
 update: ## Update the application
 	@$(composer) update
+	@$(npm) run update
 	@$(npm) install
 
 vendor: composer.json
