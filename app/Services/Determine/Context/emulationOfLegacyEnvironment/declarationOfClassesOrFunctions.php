@@ -26,4 +26,8 @@ class bdd
     {
         return "bitand";
     }
+
+    public function AddJoin() {
+        return "addjoin";
+    }
 }
